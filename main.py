@@ -1,5 +1,3 @@
-# download from http://nlp.stanford.edu/data/glove.twitter.27B.zip
-# WORD_VECTORS = "../embeddings/glove.twitter.27B.50d.txt"
 import os
 import warnings
 
@@ -21,8 +19,16 @@ warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 # Configuration
 ########################################################
 
+
+# Download the embeddings of your choice
+# for example http://nlp.stanford.edu/data/glove.6B.zip
+
+# 1 - point to the pretrained embeddings file (must be in /embeddings folder)
 EMBEDDINGS = os.path.join(EMB_PATH, "glove.6B.50d.txt")
+
+# 2 - se the correct dimensionality of the embeddings
 EMB_DIM = 50
+
 EMB_TRAINABLE = False
 BATCH_SIZE = 128
 EPOCHS = 50
@@ -87,7 +93,7 @@ for epoch in range(1, EPOCHS + 1):
     train_loss, (y_train_gold, y_train_pred) = eval_dataset(train_loader,
                                                             model,
                                                             criterion)
-    
+
     test_loss, (y_test_gold, y_test_pred) = eval_dataset(test_loader,
                                                          model,
                                                          criterion)
