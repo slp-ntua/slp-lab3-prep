@@ -3,7 +3,7 @@ import torch
 from torch import nn
 
 
-class DNN(nn.Module):
+class BaselineDNN(nn.Module):
     """
     1. We embed the words in the input texts using an embedding layer
     2. We compute the min, mean, max of the word embeddings in each sample
@@ -12,31 +12,34 @@ class DNN(nn.Module):
        to the number of classes.ngth)
     """
 
-    def __init__(self, num_classes, embeddings, trainable_emb=False):
+    def __init__(self, output_size, embeddings, trainable_emb=False):
         """
 
         Args:
-            num_classes(int): the number of classes
+            output_size(int): the number of classes
             embeddings(bool):  the 2D matrix with the pretrained embeddings
             trainable_emb(bool): train (finetune) or freeze the weights
                 the embedding layer
         """
 
-        super(DNN, self).__init__()
+        super(BaselineDNN, self).__init__()
 
         # 1 - define the embedding layer
-        ...
+        ...  # EX4
 
-        # 2 - initialize the weight of our Embedding layer
-        # with the pretrained word embeddings
-        ...
+        # 2 - initialize the weights of our Embedding layer
+        # from the pretrained word embeddings
+        ...  # EX4
 
         # 3 - define if the embedding layer will be frozen or finetuned
-        ...
+        ...  # EX4
 
-        # 4 - define the final Linear layer which maps
+        # 4 - define a non-linear transformation of the representations
+        ...  # EX5
+
+        # 5 - define the final Linear layer which maps
         # the representations to the classes
-        ...
+        ...  # EX5
 
     def forward(self, x, lengths):
         """
@@ -48,12 +51,15 @@ class DNN(nn.Module):
         """
 
         # 1 - embed the words, using the embedding layer
-        embeddings = ...
+        embeddings = ...  # EX6
 
         # 2 - construct a sentence representation out of the word embeddings
-        representations = ...
+        representations = ...  # EX6
 
-        # 3 - project the representations to classes using a linear layer
-        logits = ...
+        # 3 - transform the representations to new ones.
+        representations = ...  # EX6
+
+        # 4 - project the representations to classes using a linear layer
+        logits = ...  # EX6
 
         return logits

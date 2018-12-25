@@ -19,13 +19,23 @@ class SentenceDataset(Dataset):
         In the initialization of the dataset we will have to assign the
         input values to the corresponding class attributes
         and preprocess the text samples
+
+        -Store all meaningful arguments to the constructor here for debugging
+         and for usage in other methods
+        -Do most of the heavy-lifting like preprocessing the dataset here
+
+
         Args:
             X (list): List of training samples
             y (list): List of training labels
             word2idx (dict): a dictionary which maps words to indexes
         """
 
-        raise NotImplementedError
+        self.data = X
+        self.labels = y
+        self.word2idx = word2idx
+
+        # EX2
 
     def __len__(self):
         """
@@ -35,7 +45,8 @@ class SentenceDataset(Dataset):
         Returns:
             (int): the length of the dataset
         """
-        raise NotImplementedError
+
+        return len(self.data)
 
     def __getitem__(self, index):
         """
@@ -60,6 +71,11 @@ class SentenceDataset(Dataset):
             ::
                 example = [  533  3908  1387   649   0     0     0     0]
                 label = 1
+                length = 4
         """
 
+        # EX3
+
         raise NotImplementedError
+
+        return example, label, length

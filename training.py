@@ -30,30 +30,32 @@ def train_dataset(_epoch, dataloader, model, loss_function, optimizer):
     model.train()
     running_loss = 0.0
 
-    # get the device that the model is on (from a random parameter)
+    # obtain the model's device ID
     device = next(model.parameters()).device
 
     for index, batch in enumerate(dataloader, 1):
-
         # get the inputs (batch)
         inputs, labels, lengths = batch
 
         # move the batch tensors to the right device
+        ...  # EX9
 
-        # 1 - zero the gradients
-        ...
+        # Step 1 - zero the gradients
+        # Remember that PyTorch accumulates gradients.
+        # We need to clear them out before each batch!
+        ...  # EX9
 
-        # 2 - forward pass: y' = model(x)
-        ...
+        # Step 2 - forward pass: y' = model(x)
+        ...  # EX9
 
-        # 3 - compute loss: L = loss_function(y, y')
-        loss = ...
+        # Step 3 - compute loss: L = loss_function(y, y')
+        loss = ...  # EX9
 
-        # 4 - backward pass: compute gradient wrt model parameters
-        ...
+        # Step 4 - backward pass: compute gradient wrt model parameters
+        ...  # EX9
 
-        # 5 - update weights
-        ...
+        # Step 5 - update weights
+        ...  # EX9
 
         running_loss += loss.data.item()
 
@@ -76,7 +78,7 @@ def eval_dataset(dataloader, model, loss_function):
     y_pred = []  # the predicted labels
     y = []  # the gold labels
 
-    # get the device that the model is on (from a random parameter)
+    # obtain the model's device ID
     device = next(model.parameters()).device
 
     # IMPORTANT: in evaluation mode, we don't want to keep the gradients
@@ -86,22 +88,23 @@ def eval_dataset(dataloader, model, loss_function):
             # get the inputs (batch)
             inputs, labels, lengths = batch
 
-            # 1 - move the batch tensors to the right device
-            ...
+            # Step 1 - move the batch tensors to the right device
+            ...  # EX9
 
-            # 2 - forward pass: y' = model(x)
-            ...
+            # Step 2 - forward pass: y' = model(x)
+            ...  # EX9
 
-            # 3 - make pedictions
-            ...
+            # Step 3 - compute loss.
+            # We compute the loss only for inspection (compare train/test loss)
+            # because we do not actually backpropagate in test time
+            loss = ...  # EX9
 
-            # 4 - make pedictions
-            ...
+            # Step 4 - make predictions (class = argmax of posteriors)
+            ...  # EX9
 
-            # 5 - collect the predictions, the gold labels and the batch loss
-            ...
+            # Step 5 - collect the predictions, gold labels and batch loss
+            ...  # EX9
 
             running_loss += loss.data.item()
 
-
-    return y_pred, y
+    return running_loss / index, (y_pred, y)

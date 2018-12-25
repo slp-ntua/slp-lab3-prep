@@ -10,9 +10,9 @@ from torch.utils.data import DataLoader
 
 from config import EMB_PATH
 from dataloading import SentenceDataset
-from models import DNN
+from models import BaselineDNN
 from training import train_dataset, eval_dataset
-from utils.load_datasets import load_MR
+from utils.load_datasets import load_MR, load_Semeval2017A
 from utils.load_embeddings import load_word_vectors
 
 warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
@@ -26,6 +26,7 @@ EMB_DIM = 50
 EMB_TRAINABLE = False
 BATCH_SIZE = 128
 EPOCHS = 50
+DATASET = "MR"  # options: "MR", "Semeval2017A"
 
 # if your computer has a CUDA compatible gpu use it, otherwise use the cpu
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -39,42 +40,41 @@ print("loading word embeddings...")
 word2idx, idx2word, embeddings = load_word_vectors(EMBEDDINGS, EMB_DIM)
 
 # load the raw data
-# X_train, y_train, X_test, y_test = load_Semeval2017A()
-X_train, y_train, X_test, y_test = load_MR()
+if DATASET == "Semeval2017A":
+    X_train, y_train, X_test, y_test = load_Semeval2017A()
+elif DATASET == "MR":
+    X_train, y_train, X_test, y_test = load_MR()
+else:
+    raise ValueError("Invalid dataset")
 
-# convert labels from strings to integers
-label_encoder = LabelEncoder()
-label_encoder = label_encoder.fit(y_train)
-
-y_train = label_encoder.transform(y_train)
-y_test = label_encoder.transform(y_test)
-n_classes = label_encoder.classes_.size
+# convert data labels from strings to integers
+y_train = ...  # EX1
+y_test = ...  # EX1
+n_classes = ...  # EX1 - LabelEncoder.classes_.size
 
 # Define our PyTorch-based Dataset
 train_set = SentenceDataset(X_train, y_train, word2idx)
 test_set = SentenceDataset(X_test, y_test, word2idx)
 
-# Define our PyTorch-based DataLoader
-train_loader = DataLoader(...)
-test_loader = DataLoader(...)
+# EX4 - Define our PyTorch-based DataLoader
+train_loader = ...  # EX7
+test_loader = ...  # EX7
 
 #############################################################################
 # Model Definition (Model, Loss Function, Optimizer)
 #############################################################################
-model = DNN(num_classes=n_classes,
-            embeddings=embeddings,
-            trainable_emb=EMB_TRAINABLE)
+model = BaselineDNN(output_size=...,  # EX8
+                    embeddings=embeddings,
+                    trainable_emb=EMB_TRAINABLE)
 
 # move the mode weight to cpu or gpu
 model.to(DEVICE)
-
 print(model)
 
-criterion = torch.nn.CrossEntropyLoss()
-
 # We optimize ONLY those parameters that are trainable (p.requires_grad==True)
-parameters = filter(lambda p: p.requires_grad, model.parameters())
-optimizer = torch.optim.Adam(parameters)
+criterion = ...  # EX8
+parameters = ...  # EX8
+optimizer = ...  # EX8
 
 #############################################################################
 # Training Pipeline
