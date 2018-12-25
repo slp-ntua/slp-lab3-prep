@@ -26,7 +26,7 @@ warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 # 1 - point to the pretrained embeddings file (must be in /embeddings folder)
 EMBEDDINGS = os.path.join(EMB_PATH, "glove.6B.50d.txt")
 
-# 2 - se the correct dimensionality of the embeddings
+# 2 - set the correct dimensionality of the embeddings
 EMB_DIM = 50
 
 EMB_TRAINABLE = False
