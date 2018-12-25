@@ -84,5 +84,10 @@ for epoch in range(1, EPOCHS + 1):
     train_dataset(epoch, train_loader, model, criterion, optimizer)
 
     # evaluate the performance of the model, on both data sets
-    ... = eval_dataset(train_loader, model, criterion)
-    ... = eval_dataset(test_loader, model, criterion)
+    train_loss, (y_train_gold, y_train_pred) = eval_dataset(train_loader,
+                                                            model,
+                                                            criterion)
+    
+    test_loss, (y_test_gold, y_test_pred) = eval_dataset(test_loader,
+                                                         model,
+                                                         criterion)
