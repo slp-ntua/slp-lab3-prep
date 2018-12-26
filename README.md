@@ -1,4 +1,4 @@
-Preparatory Lab for NTUA Speech and Language Processing Course.
+Preparatory Lab for NTUA Speech and Language Processing course.
 
 ## Prerequisites
 The project requires **Python 3**.
