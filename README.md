@@ -1,7 +1,7 @@
 Preparatory Lab for NTUA Speech and Language Processing Course.
 
 ## Prerequisites
-The project support **Python 3**.
+The project requires **Python 3**.
 
 #### 1 - Create a Virtual Environment (Optional)
 You can use `virtualenv` but we recommend that you use `conda`.

@@ -31,11 +31,12 @@ class SentenceDataset(Dataset):
             word2idx (dict): a dictionary which maps words to indexes
         """
 
-        self.data = X
-        self.labels = y
-        self.word2idx = word2idx
+        # self.data = X
+        # self.labels = y
+        # self.word2idx = word2idx
 
         # EX2
+        raise NotImplementedError
 
     def __len__(self):
         """
@@ -76,6 +77,6 @@ class SentenceDataset(Dataset):
 
         # EX3
 
+        # return example, label, length
         raise NotImplementedError
 
-        return example, label, length
